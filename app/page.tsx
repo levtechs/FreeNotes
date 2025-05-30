@@ -1,4 +1,8 @@
+"use client"
+
 import Image from "next/image";
+
+import NewNoteButton from "./components/NewNoteButton";
 
 export default function Home() {
   return (
@@ -9,7 +13,9 @@ export default function Home() {
         </h1>
       </div>
       <div style={{backgroundColor: "#e3e3e3", width: "100%", height: "80%", minHeight: "40px", borderRadius: '1vh'}}>
-        
+        <div style={{margin: "3% auto", display: "flex", width: "94%", height: "100%"}}>
+          {NewNoteButton()}
+        </div>
       </div>
     </div>
   );
