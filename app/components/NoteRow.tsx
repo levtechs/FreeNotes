@@ -22,7 +22,7 @@ function timeAgo(date: Date): string {
   return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-const NoteRow = (id: string, name: string, lastEditied: Date) => {
+const NoteRow = (id: string, name: string, content: string, lastEditied: Date) => {
     const HandleClick = () => {
 
     }
@@ -34,6 +34,9 @@ const NoteRow = (id: string, name: string, lastEditied: Date) => {
                 style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5%"}}
                 onClick={HandleClick}>
                 <h1 style={{padding: "20px", fontWeight: "bold", fontSize: "140%"}}>{name}</h1>
+                <h1 style={{padding: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textAlign: "left", flex: 1, color: "dark gray"}}>
+                {content}
+                </h1>
                 <h1 style={{padding: "20px"}}>{timeAgo(lastEditied)}</h1>
             </button>
         </div>

@@ -25,7 +25,7 @@ const NoteRows = ({ refreshKey }: { refreshKey: number }) => {
 
     return (
         <div style={{margin: "0 auto", width: "100%", height: "80%", display: "flex", flexDirection: "column", gap: "2%", overflowY: "auto"}}>
-            {notes.map(note => NoteRow(note.id, note.name, new Date(note["last-edited"])))}
+            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"])))}
         </div>
     )
 }
