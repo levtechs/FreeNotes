@@ -24,11 +24,11 @@ function timeAgo(date: Date): string {
 
 const NoteRow = (id: string, name: string, lastEditied: Date) => {
     const HandleClick = () => {
-        
+
     }
 
     return (
-        <div style={{width: "100%", height: "10%", minHeight: "40px", display: "flex"}}>
+        <div key={id} style={{width: "100%", height: "10%", minHeight: "40px", display: "flex"}}>
             <button 
                 className ="bg-[#a5c2ac] hover:bg-[#8bb394] rounded-[10px] transition-colors duration-300" 
                 style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5%"}}

@@ -1,10 +1,31 @@
-import NoteRow from "./NoteRow"
+import { useEffect, useState } from "react";
 
-const NoteRows = () => {
+import NoteRow from "./NoteRow"
+import NewNoteButton from "./NewNoteButton";
+
+const NoteRows = ({ refreshKey }: { refreshKey: number }) => {
+
+    interface Note {
+        id: string;
+        name: string;
+        content: string;
+        "last-edited": string;
+    }
+
+    const [notes, setNotes] = useState<Note[]>([]);
+    useEffect(() => {
+        const FetchNotes = async () => {
+            const response = await fetch("/api/gns");
+            //console.log(response);
+            const data = await response.json();
+            setNotes(data);
+        };
+        FetchNotes();
+    }, [refreshKey])
+
     return (
         <div style={{margin: "0 auto", width: "100%", height: "80%", display: "flex", flexDirection: "column", gap: "2%", overflowY: "auto"}}>
-            {NoteRow("1", "note 1", new Date())}
-            {NoteRow("2", "note 2", new Date(2025, 4, 30, 20, 5, 0))}
+            {notes.map(note => NoteRow(note.id, note.name, new Date(note["last-edited"])))}
         </div>
     )
 }

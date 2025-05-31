@@ -1,8 +1,14 @@
 "use client";
 
-const NewNoteButton = () => {
-  const HandleClick = () => {
-  };
+interface NewNoteButtonProps {
+  onNewNote: () => void;
+}
+
+const NewNoteButton = ({ onNewNote }: NewNoteButtonProps) => {
+    async function HandleClick() {
+        await fetch("/api/cn", { method: "GET" });
+        onNewNote();
+    }
 
   return (
     <button
