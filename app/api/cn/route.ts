@@ -8,7 +8,7 @@ export async function GET(request: Request) {
     const fileData = await fs.readFile(filePath, 'utf-8');
     const notes = JSON.parse(fileData); // ✅ parse string into object
 
-    notes.push({
+    notes.unshift({
         id: String(notes.length + 1),
         name: "new note",
         content: "added from API",
