@@ -15,7 +15,7 @@ const NoteRows = ({ refreshKey }: { refreshKey: number }) => {
     const [notes, setNotes] = useState<Note[]>([]);
     useEffect(() => {
         const FetchNotes = async () => {
-            const response = await fetch("/api/gns");
+            const response = await fetch("/api", { method: "GET"});
             //console.log(response);
             const data = await response.json();
             setNotes(data);
