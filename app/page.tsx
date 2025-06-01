@@ -15,9 +15,9 @@ export default function Home() {
   }
   
   return (
-    <div style={{width: "50%", height: "80vh", margin: "10vh auto", display: "flex", flexDirection: "column", gap: '5%'}}>
+    <div style={{width: "50%", minWidth: "600px", height: "80vh", minHeight: "800px", margin: "10vh auto", display: "flex", flexDirection: "column", gap: '5%'}}>
       <div style={{backgroundColor: "var(--panel)", width: "100%", height: "10%", minHeight: "40px", borderRadius: '20px'}}>
-        <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '5vh', textAlign: 'center'}}>
+        <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '320%', textAlign: 'center'}}>
           Recent Notes
         </h1>
       </div>

@@ -22,16 +22,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
+    --background: #2a2b29;
     --foreground: #ffffff;
-    --panel: #e3e3e3;
-    --1: #6b826d; 
-    --2: #7e947f;
-    --3: #8bb394;
-    --4: #a5c2ac; 
-    --text-dark: #142714; 
-    --text-main: #2d472e; 
-    --text-sub: #4a4a4a;  
+    --panel: #444444;
+    --1: #8f998f; 
+    --2: #5e665e;
+    --3: #707972;
+    --4: #545855; 
+    --text-dark: #e1f5e1; 
+    --text-main: #c2dfc3; 
+    --text-sub: #dae2da;  
   }
 }
 

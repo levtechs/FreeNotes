@@ -24,7 +24,7 @@ const NewNoteButton = ({ onNewNote }: NewNoteButtonProps) => {
                 className="
                     w-[clamp(120px,20%,150px)] h-[10%]
                     bg-[var(--2)] hover:bg-[var(--1)]
-                    font-bold text-[clamp(10px,3vh,25px)] text-[var(--text-dark)]
+                    font-bold text-[25px] text-[var(--text-dark)]
                     rounded-[10px] 
                     transition-colors duration-300"
             >
@@ -46,9 +46,9 @@ const NewNoteButton = ({ onNewNote }: NewNoteButtonProps) => {
                 <button
                     onClick={HandleClick}
                     className="
-                        w-[clamp(120px,20%,150px)] h-[10%]
+                        w-[clamp(120px,20%,150px)] h-[100%]
                         bg-[var(--2)] hover:bg-[var(--1)]
-                        font-bold text-[clamp(10px,3vh,25px)] text-[var(--text-dark)]
+                        font-bold text-[25px] text-[var(--text-dark)]
                         rounded-[10px] 
                         transition-colors duration-300"                >
                     Create
