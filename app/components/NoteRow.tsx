@@ -30,10 +30,10 @@ const NoteRow = (id: string, name: string, content: string, lastEditied: Date) =
     return (
         <div key={id} style={{width: "100%", height: "10%", minHeight: "40px", display: "flex"}}>
             <button 
-                className ="bg-[#a5c2ac] hover:bg-[#8bb394] rounded-[10px] transition-colors duration-300" 
+                className ="bg-[var(--4)] hover:bg-[var(--3)] rounded-[10px] transition-colors duration-300" 
                 style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5%"}}
                 onClick={HandleClick}>
-                <h1 style={{padding: "20px", fontWeight: "bold", fontSize: "140%"}}>{name}</h1>
+                <h1 style={{padding: "20px", fontWeight: "bold", fontSize: "140%", color: "var(--text-dark)"}}>{name}</h1>
                 <h1 style={{padding: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textAlign: "left", flex: 1, color: "dark gray"}}>
                 {content}
                 </h1>

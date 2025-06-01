@@ -16,12 +16,12 @@ export default function Home() {
   
   return (
     <div style={{width: "50%", height: "80vh", margin: "10vh auto", display: "flex", flexDirection: "column", gap: '5%'}}>
-      <div style={{backgroundColor: "#e3e3e3", width: "100%", height: "10%", minHeight: "40px", borderRadius: '20px'}}>
-        <h1 style={{fontWeight: 'bold', color: "#2d472e", fontSize: '5vh', textAlign: 'center'}}>
+      <div style={{backgroundColor: "var(--panel)", width: "100%", height: "10%", minHeight: "40px", borderRadius: '20px'}}>
+        <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '5vh', textAlign: 'center'}}>
           Recent Notes
         </h1>
       </div>
-      <div style={{backgroundColor: "#e3e3e3", width: "100%", height: "80%", minHeight: "40px", borderRadius: '20px'}}>
+      <div style={{backgroundColor: "var(--panel)", width: "100%", height: "80%", minHeight: "40px", borderRadius: '20px'}}>
         <div style={{margin: "3% auto", width: "94%", height: "100%", display: "flex", flexDirection: "column", gap: "4%"}}>
           <NewNoteButton onNewNote={handleNewNote} />
           <NoteRows refreshKey={refreshKey} />
