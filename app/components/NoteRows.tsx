@@ -3,7 +3,14 @@ import { useEffect, useState } from "react";
 import NoteRow from "./NoteRow"
 import NewNoteButton from "./NewNoteButton";
 
-const NoteRows = (refreshKey: number, setNumNoteRows: (numNoteRows: number) => void, setIsEditing: (value: [boolean, string]) => void) => {
+interface NoteRowsProps {
+    refreshKey: number, 
+    setNumNoteRows: (numNoteRows: number) => void, 
+    setIsEditing: (value: [boolean, string]) => void,
+    isEditing: [boolean, string]
+}
+
+const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing, isEditing }: NoteRowsProps) => {
 
     interface Note {
         id: string;
@@ -15,18 +22,26 @@ const NoteRows = (refreshKey: number, setNumNoteRows: (numNoteRows: number) => v
     const [notes, setNotes] = useState<Note[]>([]);
     useEffect(() => {
         const FetchNotes = async () => {
-            const response = await fetch("/api", { method: "GET"});
-            //console.log(response);
-            const data: Note[] = await response.json();
-            setNotes(data);
-            setNumNoteRows(data.length);
+            const cached = localStorage.getItem("notes");
+            if (cached && refreshKey === 0) {
+                const data = JSON.parse(cached) as Note[];
+                setNotes(data);
+                setNumNoteRows(data.length);
+            } else {
+                const response = await fetch("/api", { method: "GET" });
+                const data: Note[] = await response.json();
+                setNotes(data);
+                setNumNoteRows(data.length);
+                localStorage.setItem("notes", JSON.stringify(data));
+            }
         };
         FetchNotes();
-    }, [refreshKey])
+    }, [refreshKey]);
+
 
     return (
         <div style={{margin: "0 auto", width: "100%", height: "80%", display: "flex", flexDirection: "column", gap: "2%", overflowY: "auto"}}>
-            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"]), setIsEditing))}
+            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"]), setIsEditing, isEditing))}
         </div>
     )
 }

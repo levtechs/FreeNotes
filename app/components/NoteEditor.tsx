@@ -7,7 +7,6 @@ interface NoteEditorProps {
 
 const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
 
-
     const [noteName, setNoteName] = useState("");
     const [noteContents, setNoteContents] = useState("");
 

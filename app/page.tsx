@@ -27,7 +27,7 @@ export default function Home() {
         <div style={{backgroundColor: "var(--panel)", width: "100%", height: "90%", minHeight: "40px", borderRadius: '20px'}}>
           <div style={{margin: "3% auto", width: "94%", height: "100%", display: "flex", flexDirection: "column", gap: "4%"}}>
             <NewNoteButton onNewNote={handleNewNote} />
-            {NoteRows(refreshKey, setNumNoteRows, setIsEditing)}
+            <NoteRows refreshKey={refreshKey} setNumNoteRows={setNumNoteRows} setIsEditing={setIsEditing} isEditing={isEditing}/>
           </div>
         </div>
       </>
