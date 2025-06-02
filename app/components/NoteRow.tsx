@@ -22,13 +22,13 @@ function timeAgo(date: Date): string {
   return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-const NoteRow = (id: string, name: string, content: string, lastEditied: Date) => {
+const NoteRow = (id: string, name: string, content: string, lastEditied: Date, setIsEditing: (value: [boolean, string]) => void) => {
     const HandleClick = () => {
-
+        setIsEditing([true, id]);
     }
 
     return (
-        <div key={id} style={{width: "100%", height: "10%", minHeight: "40px", display: "flex"}}>
+        <div key={id} style={{width: "100%", height: "60px", display: "flex"}}>
             <button 
                 className ="bg-[var(--4)] hover:bg-[var(--3)] rounded-[10px] transition-colors duration-300" 
                 style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "5%"}}

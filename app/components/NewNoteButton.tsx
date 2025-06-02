@@ -22,7 +22,7 @@ const NewNoteButton = ({ onNewNote }: NewNoteButtonProps) => {
             <button
                 onClick={() => setIsCreating(true)}
                 className="
-                    w-[clamp(120px,20%,150px)] h-[10%]
+                    w-[clamp(140px,20%,150px)] h-[75px]
                     bg-[var(--2)] hover:bg-[var(--1)]
                     font-bold text-[25px] text-[var(--text-dark)]
                     rounded-[10px] 
@@ -34,24 +34,34 @@ const NewNoteButton = ({ onNewNote }: NewNoteButtonProps) => {
     }
     else {
         return (
-            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+            <div style={{height: "75px", display: "flex", gap: "1rem", alignItems: "center" }}>
                 <input
                     type="text"
                     placeholder="New note name"
                     value={noteName}
                     onChange={(e) => setNoteName(e.target.value)}
-                    className="flex-1 px-3 py-2 rounded-[10px] border border-gray-400 text-[clamp(10px,3vh,25px)]"
-                    style={{ width: "100%" }}
+                    className="flex-1 px-3 py-2 rounded-[10px] border border-gray-400 text-[25px]"
+                    style={{ width: "100%", height: "100%"}}
                 />
                 <button
                     onClick={HandleClick}
                     className="
-                        w-[clamp(120px,20%,150px)] h-[100%]
+                        w-[clamp(140px,20%,150px)] h-[100%]
                         bg-[var(--2)] hover:bg-[var(--1)]
                         font-bold text-[25px] text-[var(--text-dark)]
                         rounded-[10px] 
                         transition-colors duration-300"                >
                     Create
+                </button>
+                                <button
+                    onClick={() => setIsCreating(false)}
+                    className="
+                        w-[clamp(90px,15%,140px)] h-[100%]
+                        bg-[var(--4)] hover:bg-[var(--3)]
+                        font-bold text-[25px] text-[var(--text-dark)]
+                        rounded-[10px] 
+                        transition-colors duration-300"                >
+                    Cancel
                 </button>
             </div>
         );

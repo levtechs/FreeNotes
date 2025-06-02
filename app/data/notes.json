@@ -1,5 +1,11 @@
 [
   {
+    "id": "4",
+    "name": "afwe",
+    "content": "empty note",
+    "last-edited": "2025-06-02T00:01:15.429Z"
+  },
+  {
     "id": "3",
     "name": "my new note",
     "content": "added from API",

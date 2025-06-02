@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     notes.unshift({
         id: String(notes.length + 1),
         name: name,
-        content: "added from API",
+        content: "empty note",
         "last-edited": new Date().toISOString()
     });
 
@@ -38,3 +38,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(JSON.parse("success"))
 }
+/*
+export async function PUT(request: Request) {
+}
+*/
