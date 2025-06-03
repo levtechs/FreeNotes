@@ -34,7 +34,7 @@ export default function Home() {
         <div style={{backgroundColor: "var(--panel)", width: "100%", height: "90%", minHeight: "40px", borderRadius: '20px'}}>
           <div style={{margin: "3% auto", width: "94%", height: "100%", display: "flex", flexDirection: "column", gap: "4%"}}>
             <NewNoteButton onNewNote={handleNewNote} />
-            <NoteRows refreshKey={refreshKey} setNumNoteRows={setNumNoteRows} setIsEditing={setIsEditing} UpdateID={UpdateID}/>
+            <NoteRows refreshKey = {refreshKey} setNumNoteRows={setNumNoteRows} setIsEditing={setIsEditing} UpdateID={UpdateID}/>
           </div>
         </div>
       </>
@@ -47,7 +47,7 @@ export default function Home() {
         <div style={{width: "50%", minWidth: "500px", height: "100%", display: "flex", flexDirection: "column", gap: '5%'}}>
           <NoteSelector />
         </div>
-          <NoteEditor key={currentID} id={currentID} setIsEditing={setIsEditing} />
+          <NoteEditor id={currentID} setIsEditing={setIsEditing} />
       </div>
 
     );

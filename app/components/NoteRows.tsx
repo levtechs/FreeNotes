@@ -8,7 +8,6 @@ interface NoteRowsProps {
     setNumNoteRows: (numNoteRows: number) => void, 
     setIsEditing: (value: boolean) => void
     UpdateID: (value: string) => void
-
 }
 
 const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteRowsProps) => {
