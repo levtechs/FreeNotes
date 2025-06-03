@@ -6,11 +6,12 @@ import NewNoteButton from "./NewNoteButton";
 interface NoteRowsProps {
     refreshKey: number, 
     setNumNoteRows: (numNoteRows: number) => void, 
-    setIsEditing: (value: [boolean, string]) => void,
-    isEditing: [boolean, string]
+    setIsEditing: (value: boolean) => void
+    UpdateID: (value: string) => void
+
 }
 
-const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing, isEditing }: NoteRowsProps) => {
+const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteRowsProps) => {
 
     interface Note {
         id: string;
@@ -38,10 +39,9 @@ const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing, isEditing }: Note
         FetchNotes();
     }, [refreshKey]);
 
-
     return (
         <div style={{margin: "0 auto", width: "100%", height: "80%", display: "flex", flexDirection: "column", gap: "2%", overflowY: "auto"}}>
-            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"]), setIsEditing, isEditing))}
+            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"]), setIsEditing, UpdateID))}
         </div>
     )
 }

@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 
 interface NoteEditorProps {
     id: string;
-    setIsEditing: (value: [boolean, string]) => void;
+    setIsEditing: (value: boolean) => void;
 }
 
 const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
+
+    //console.log(id);
 
     const [noteName, setNoteName] = useState("");
     const [noteContents, setNoteContents] = useState("");
@@ -37,7 +39,7 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
                 <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '320%', textAlign: 'left', whiteSpace: "nowrap", marginRight: "auto"}}>Editing "{noteName}"</h1>
                 <button
                     style={{marginLeft: "auto"}}
-                    onClick={() => setIsEditing([false, "0"])}
+                    onClick={() => setIsEditing(false)}
                     className="
                         w-[clamp(140px,20%,150px)] h-[75px]
                         bg-[var(--2)] hover:bg-[var(--1)]

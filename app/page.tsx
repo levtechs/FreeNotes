@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef} from "react";
 
 import NewNoteButton from "./components/NewNoteButton";
 import NoteRows from "./components/NoteRows";
@@ -9,11 +9,18 @@ export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
   const [numNoteRows, setNumNoteRows] = useState(0);
 
-  const [isEditing, setIsEditing] = useState<[boolean, string]>([false, "0"]);
+  //const [isEditing, setIsEditing] = useState<[boolean, string]>([false, "0"]);
+  const [isEditing, setIsEditing] = useState(false);
 
   // called when a new note is added in NewNoteButton
   function handleNewNote() {
     setRefreshKey((prev) => prev + 1);
+  }
+
+  const [currentID, setCurrentID] = useState("");
+  const UpdateID = (newId: string) => {
+    setCurrentID(newId);
+    console.log(currentID);
   }
 
   const NoteSelector = () => {
@@ -27,20 +34,20 @@ export default function Home() {
         <div style={{backgroundColor: "var(--panel)", width: "100%", height: "90%", minHeight: "40px", borderRadius: '20px'}}>
           <div style={{margin: "3% auto", width: "94%", height: "100%", display: "flex", flexDirection: "column", gap: "4%"}}>
             <NewNoteButton onNewNote={handleNewNote} />
-            <NoteRows refreshKey={refreshKey} setNumNoteRows={setNumNoteRows} setIsEditing={setIsEditing} isEditing={isEditing}/>
+            <NoteRows refreshKey={refreshKey} setNumNoteRows={setNumNoteRows} setIsEditing={setIsEditing} UpdateID={UpdateID}/>
           </div>
         </div>
       </>
     );
   }
 
-  if (isEditing[0]){
+  if (isEditing){
     return (
       <div style={{display: "flex", flexDirection: "row", margin: "10vh auto", height: "80vh", minHeight: `${numNoteRows * 80 + 150}px`, gap: "5%", padding: "0 5%"}}>
         <div style={{width: "50%", minWidth: "500px", height: "100%", display: "flex", flexDirection: "column", gap: '5%'}}>
           <NoteSelector />
         </div>
-        <NoteEditor id={isEditing[1]} setIsEditing={setIsEditing}/>
+          <NoteEditor key={currentID} id={currentID} setIsEditing={setIsEditing} />
       </div>
 
     );

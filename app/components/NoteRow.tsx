@@ -22,11 +22,10 @@ function timeAgo(date: Date): string {
   return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-const NoteRow = (id: string, name: string, content: string, lastEditied: Date, setIsEditing: (value: [boolean, string]) => void, isEditing: [boolean, string]) => {
+const NoteRow = (id: string, name: string, content: string, lastEditied: Date, setIsEditing: (value: boolean) => void, UpdateID: (value: string) => void) => {
     const HandleClick = () => {
-        if (isEditing[0] !== true || isEditing[1] !== id) {
-            setIsEditing([true, id]);
-        }
+        setIsEditing(true);
+        UpdateID(id);
     }
 
     return (
