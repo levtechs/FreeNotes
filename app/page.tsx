@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState, useRef} from "react";
+import { useState, useCallback} from "react";
 
 import NewNoteButton from "./components/NewNoteButton";
 import NoteRows from "./components/NoteRows";
@@ -18,10 +18,10 @@ export default function Home() {
   }
 
   const [currentID, setCurrentID] = useState("");
-  const UpdateID = (newId: string) => {
-    setCurrentID(newId);
-    console.log(currentID);
-  }
+
+  const UpdateID = (newID: string) => {
+    setCurrentID(newID);
+  };
 
   const NoteSelector = () => {
     return (
@@ -43,18 +43,18 @@ export default function Home() {
 
   if (isEditing){
     return (
-      <div style={{display: "flex", flexDirection: "row", margin: "10vh auto", height: "80vh", minHeight: `${numNoteRows * 80 + 150}px`, gap: "5%", padding: "0 5%"}}>
+      <div style={{display: "flex", flexDirection: "row", margin: "10vh auto", height: "80vh", gap: "5%", padding: "0 5%"}}>
         <div style={{width: "50%", minWidth: "500px", height: "100%", display: "flex", flexDirection: "column", gap: '5%'}}>
           <NoteSelector />
         </div>
-          <NoteEditor id={currentID} setIsEditing={setIsEditing} />
+          <NoteEditor id={currentID} setIsEditing={(value: boolean) => {setIsEditing(value); setRefreshKey((prev) => prev + 1);}} />
       </div>
 
     );
   }
   else {
     return (
-      <div style={{width: "50%", minWidth: "500px", height: "80vh", minHeight: `${numNoteRows * 80 + 150}px`, margin: "10vh auto", display: "flex", flexDirection: "column", gap: '5%'}}>
+      <div style={{width: "50%", minWidth: "500px", height: "80vh", margin: "10vh auto", display: "flex", flexDirection: "column", gap: '5%'}}>
         <NoteSelector />
       </div>
     );

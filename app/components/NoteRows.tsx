@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import React from "react";
 
 import NoteRow from "./NoteRow"
-import NewNoteButton from "./NewNoteButton";
 
 interface NoteRowsProps {
     refreshKey: number, 
@@ -16,7 +16,7 @@ const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteR
         id: string;
         name: string;
         content: string;
-        "last-edited": string;
+        lastEdited: string;
     }
 
     const [notes, setNotes] = useState<Note[]>([]);
@@ -40,7 +40,17 @@ const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteR
 
     return (
         <div style={{margin: "0 auto", width: "100%", height: "80%", display: "flex", flexDirection: "column", gap: "2%", overflowY: "auto"}}>
-            {notes.map(note => NoteRow(note.id, note.name, note.content, new Date(note["last-edited"]), setIsEditing, UpdateID))}
+            {notes.map(note => (
+                <NoteRow
+                    key={note.id}
+                    id={note.id}
+                    name={note.name}
+                    content={note.content}
+                    lastEdited={new Date(note.lastEdited)}
+                    setIsEditing={setIsEditing}
+                    UpdateID={UpdateID}
+                />
+            ))}        
         </div>
     )
 }

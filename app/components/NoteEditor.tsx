@@ -1,3 +1,4 @@
+import { send } from "process";
 import { useState, useEffect } from "react";
 
 interface NoteEditorProps {
@@ -33,10 +34,15 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
         FetchNotes();
     }, [id])
 
+    const updateBackend = (newContent: string) => {
+        setNoteContents(newContent);
+        fetch("/api", { method: "PUT", body: JSON.stringify({id: id, newContent: newContent}), headers: { "Content-Type": "application/json" }});
+    }
+
     return (
-        <div style={{backgroundColor: "var(--panel)", width: "60%", minWidth: "400px", height: "100%", borderRadius: "20px"}}>
-            <div style={{margin: "3% auto", width: "94%", height: "100%", display: "flex", flexDirection: "row", gap: "4%"}}>
-                <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '320%', textAlign: 'left', whiteSpace: "nowrap", marginRight: "auto"}}>Editing "{noteName}"</h1>
+        <div style={{backgroundColor: "var(--panel)", width: "60%", minWidth: "400px", height: "100%", borderRadius: "20px", display: "flex", flexDirection: "column"}}>
+            <div style={{margin: "3% auto", width: "100%", padding: "0 30px", height: "70px", display: "flex", flexDirection: "row", gap: "4%"}}>
+                <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '320%', textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginRight: "auto"}}>Editing "{noteName}"</h1>
                 <button
                     style={{marginLeft: "auto"}}
                     onClick={() => setIsEditing(false)}
@@ -50,6 +56,27 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
                     Done
                 </button>
             </div>
+                <div style={{ padding: "30px", height: "100%" }}>
+                    <textarea
+                        value={noteContents}
+                        onChange={(e) => updateBackend(e.target.value)}
+                        placeholder="Type something..."
+                        style={{
+                            height: "100%",
+                            padding: "10px",
+                            paddingTop: "10px", // ensure there's top spacing
+                            fontSize: "16px",
+                            borderRadius: "8px",
+                            border: "1px solid #ccc",
+                            width: "100%",
+                            boxSizing: "border-box",
+                            resize: "none", // optional: prevent resizing
+                            lineHeight: "1.5", // keeps line spacing clean
+                            fontFamily: "inherit", // match your UI font
+                            color: "var(--text-main)" // optional color
+                        }}
+                    />
+                </div>
         </div>
     );
 }

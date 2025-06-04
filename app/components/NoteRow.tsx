@@ -22,7 +22,16 @@ function timeAgo(date: Date): string {
   return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
-const NoteRow = (id: string, name: string, content: string, lastEditied: Date, setIsEditing: (value: boolean) => void, UpdateID: (value: string) => void) => {
+interface NoteRowProps {
+    id: string, 
+    name: string, 
+    content: string, 
+    lastEdited: Date, 
+    setIsEditing: (value: boolean) => void, 
+    UpdateID: (value: string) => void
+}
+
+const NoteRow = ( {id, name, content, lastEdited, setIsEditing, UpdateID}: NoteRowProps) => {
     const HandleClick = () => {
         setIsEditing(true);
         UpdateID(id);
@@ -36,7 +45,7 @@ const NoteRow = (id: string, name: string, content: string, lastEditied: Date, s
                 onClick={HandleClick}>
                 <h1 style={{padding: "20px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", fontWeight: "bold", fontSize: "140%", color: "var(--text-dark)"}}>{name}</h1>
                 <h1 style={{padding: "15px", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", textAlign: "left", flex: 1, color: "var(--text-sub)"}}>{content}</h1>
-                <h1 style={{padding: "20px", whiteSpace: "nowrap", color: "var(--text-sub)"}}>{timeAgo(lastEditied)}</h1>
+                <h1 style={{padding: "20px", whiteSpace: "nowrap", color: "var(--text-sub)"}}>{timeAgo(lastEdited)}</h1>
             </button>
         </div>
     )
