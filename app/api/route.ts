@@ -1,71 +1,44 @@
+// app/api/notes/route.ts
 import { NextResponse } from 'next/server';
+import pool from '@/lib/db';
 
-import { promises as fs } from 'fs';
-import path from 'path';
-
-interface Note {
-    id: string;
-    name: string;
-    content: string;
-    lastEdited: string;
-}
-
-const RetrieveNotes = async (): Promise<Note[]> => {
-    const filePath = path.join(process.cwd(), 'app/data', 'notes.json');
-    const fileData = await fs.readFile(filePath, 'utf-8');
-    return JSON.parse(fileData);
-}
-
-export async function GET(request: Request) {
-    const notes = await RetrieveNotes()
-    return NextResponse.json(notes);
+export async function GET() {
+  const res = await pool.query("SELECT * FROM notes ORDER BY last_edited DESC");
+  return NextResponse.json(res.rows);
 }
 
 export async function POST(request: Request) {
-    const notes = await RetrieveNotes();
+  const body = await request.json();
+  const name = body.name || "Untitled";
+  const content = "empty note";
+  const now = new Date(); // UTC time
 
-    const body = await request.json();
-    const name = body.name || "Untitled";
+  const res = await pool.query(
+    "INSERT INTO notes (name, content, last_edited) VALUES ($1, $2, $3) RETURNING *",
+    [name, content, now]
+  );
 
-    notes.unshift({
-        id: String(notes.length + 1),
-        name: name,
-        content: "empty note",
-        lastEdited: new Date().toISOString()
-    });
-
-    await fs.writeFile(path.join(process.cwd(), 'app/data', 'notes.json'), JSON.stringify(notes, null, 2));
-
-    return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, note: res.rows[0] });
 }
 
 export async function PUT(request: Request) {
-    const notes = await RetrieveNotes();
+  const body = await request.json();
+  const id = body.id;
+  const newContent = body.newContent;
+  const now = new Date(); // UTC time
 
-    const body = await request.json();
-    const id = body.id;
-    const newContent = body.newContent;
+  const res = await pool.query(
+    `UPDATE notes 
+     SET content = $1, last_edited = $3 
+     WHERE id = $2 
+     RETURNING *`,
+    [newContent, id, now]
+  );
 
-    // Find the index of the note with the matching ID
-    const index = notes.findIndex(note => note.id === id);
+  if (res.rowCount === 0) {
+    return NextResponse.json({ error: "Note not found" }, { status: 404 });
+  }
 
-    if (index === -1) {
-        return NextResponse.json({ error: "Note not found" }, { status: 404 });
-    }
-
-    // Remove the note, update its fields
-    const [noteToUpdate] = notes.splice(index, 1);
-    noteToUpdate.content = newContent;
-    noteToUpdate.lastEdited = new Date().toISOString();
-
-    // Move it to the top
-    notes.unshift(noteToUpdate);
-
-    // Save updated notes
-    await fs.writeFile(
-        path.join(process.cwd(), 'app/data', 'notes.json'),
-        JSON.stringify(notes, null, 2)
-    );
-
-    return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, note: res.rows[0] });
 }
+

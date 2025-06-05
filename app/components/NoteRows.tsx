@@ -16,7 +16,7 @@ const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteR
         id: string;
         name: string;
         content: string;
-        lastEdited: string;
+        "last_edited": string;
     }
 
     const [notes, setNotes] = useState<Note[]>([]);
@@ -46,7 +46,7 @@ const NoteRows = ( { refreshKey, setNumNoteRows, setIsEditing,  UpdateID}: NoteR
                     id={note.id}
                     name={note.name}
                     content={note.content}
-                    lastEdited={new Date(note.lastEdited)}
+                    lastEdited={new Date(note["last_edited"])}
                     setIsEditing={setIsEditing}
                     UpdateID={UpdateID}
                 />

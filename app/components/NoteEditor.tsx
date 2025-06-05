@@ -34,9 +34,9 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
         FetchNotes();
     }, [id])
 
-    const updateBackend = (newContent: string) => {
-        setNoteContents(newContent);
-        fetch("/api", { method: "PUT", body: JSON.stringify({id: id, newContent: newContent}), headers: { "Content-Type": "application/json" }});
+    const closeEditor = () => {
+        setIsEditing(false);
+        fetch("/api", { method: "PUT", body: JSON.stringify({id: id, newContent: noteContents}), headers: { "Content-Type": "application/json" }});
     }
 
     return (
@@ -45,7 +45,7 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
                 <h1 style={{fontWeight: 'bold', color: "var(--text-main)", fontSize: '320%', textAlign: 'left', whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginRight: "auto"}}>Editing "{noteName}"</h1>
                 <button
                     style={{marginLeft: "auto"}}
-                    onClick={() => setIsEditing(false)}
+                    onClick={() => closeEditor()}
                     className="
                         w-[clamp(140px,20%,150px)] h-[75px]
                         bg-[var(--2)] hover:bg-[var(--1)]
@@ -59,7 +59,7 @@ const NoteEditor = ({ id, setIsEditing}: NoteEditorProps) => {
                 <div style={{ padding: "30px", height: "100%" }}>
                     <textarea
                         value={noteContents}
-                        onChange={(e) => updateBackend(e.target.value)}
+                        onChange={(e) => setNoteContents(e.target.value)}
                         placeholder="Type something..."
                         style={{
                             height: "100%",
